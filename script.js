@@ -162,3 +162,8 @@ function clean() {
 	}
 	console.log(array);
 }
+
+let numbers = [7, 5, 6, 3, 8, 9, 2, 1, 4];
+
+numbers = numbers.sort();
+console.log(numbers);
