@@ -75,3 +75,90 @@ function par() {
 		alert("Insira um numero");
 	}
 }
+
+let array = ["karynne", "eve"];
+let lista = JSON.parse(localStorage.getItem("lista"));
+let list = document.getElementById("nomes");
+
+if (lista !== null) {
+	array = lista;
+} else {
+	localStorage.setItem("lista", JSON.stringify(array));
+}
+
+console.log(array);
+
+for (i = 0; i < array.length; ++i) {
+	let li = document.createElement("li");
+	li.innerText = array[i];
+	list.appendChild(li);
+}
+
+function addc() {
+	let nome = document.getElementById("add").value;
+	if (nome !== "") {
+		console.log(nome);
+		array_split = nome.split(",");
+		array.unshift(array_split.flat());
+		array = array.flat();
+		array_split = array_split.reverse();
+		array = array.map((el) => el.trim());
+
+		for (i = 0; i < array_split.length; ++i) {
+			let li = document.createElement("li");
+			li.innerText = array_split[i];
+			list.insertBefore(li, list.firstChild);
+		}
+
+		localStorage.setItem("lista", JSON.stringify(array.flat()));
+	}
+	console.log(array);
+}
+function addf() {
+	let nome = document.getElementById("add").value;
+	if (nome !== "") {
+		console.log(nome);
+		array_split = nome.split(",");
+		array.push(array_split.flat());
+		array = array.flat();
+		array = array.map((el) => el.trim());
+
+		for (i = 0; i < array_split.length; ++i) {
+			let li = document.createElement("li");
+			li.innerText = array_split[i];
+			list.appendChild(li);
+		}
+
+		localStorage.setItem("lista", JSON.stringify(array));
+	}
+	console.log(array);
+}
+function delc() {
+	array.shift();
+
+	list.removeChild(list.firstElementChild);
+
+	localStorage.setItem("lista", JSON.stringify(array));
+	console.log(array);
+}
+function delf() {
+	array.pop();
+
+	list.removeChild(list.lastElementChild);
+
+	localStorage.setItem("lista", JSON.stringify(array));
+	console.log(array);
+}
+function clean() {
+	let clean = prompt("Tem certeza? digite 'clean' para confirmar:");
+	if (clean == "clean") {
+		for (i = 0; i < array.length; ++i) {
+			list.removeChild(list.firstElementChild);
+		}
+
+		array = [];
+
+		localStorage.setItem("lista", JSON.stringify(array));
+	}
+	console.log(array);
+}
